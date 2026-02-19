@@ -62,3 +62,6 @@ Durante la ejecución de la aplicación en la fase de aproximación a Marte en 1
   - Validación de datos
   - Pruebas de integración
   - Manejo de errores entre módulos
+  
+![casos de uso](img/diagrama.png)
+[casos de uso](img/diagramanuevo.png)

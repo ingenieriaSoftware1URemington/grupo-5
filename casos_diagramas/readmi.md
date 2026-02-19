@@ -65,3 +65,4 @@ Durante la ejecución de la aplicación en la fase de aproximación a Marte en 1
   
 ![casos de uso](img/diagrama.png)
 [casos de uso](img/diagramanuevo.png)
+![casos de uso](img/diagrama-clases.png)

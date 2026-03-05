@@ -22,4 +22,4 @@ class Hotel:
         return self._id_hotel
 
     def mostrar_info(self):
-        return f"Hotel: {self._nombre} - Disponibles:
+        return f"Hotel: {self._nombre} - Disponibles: {self._habitaciones}"

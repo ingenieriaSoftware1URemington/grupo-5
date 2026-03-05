@@ -1,18 +1,14 @@
-def _init_(self, id_turista, nombre, documento, email, telefono):
-        self._id_turista = id_turista
-        self._nombre = nombre
-        self._documento = documento
-        self._email = email
-        self._telefono = telefono
+class Turista:
+
+    def __init__(self, id, nombre, documento, email, presupuesto):
+        self.id = id
+        self.nombre = nombre
+        self.documento = documento
+        self.email = email
+        self.presupuesto = presupuesto
 
     def get_id(self):
-        return self._id_turista
+        return self.id
 
-    def get_nombre(self):
-        return self._nombre
-
-    def set_email(self, nuevo_email):
-        self._email = nuevo_email
-
-    def mostrar_info(self):
-        return f"Turista: {self._nombre} - Email: {self._email}"
+    def __str__(self):
+        return f"{self.id} - {self.nombre} - ${self.presupuesto}"

@@ -7,6 +7,12 @@ from models.sucursal import Sucursal
 def menu():
     sistema = SistemaAgencia()
 
+    hotel = Hotel("H1", "Decameron", "Cartagena", 5, 10)
+    sucursal = Sucursal("S1", "Sucursal Centro", "Medellín", "Calle 10")
+
+    sistema.registrar_hotel(hotel)
+    sistema.registrar_sucursal(sucursal)
+
     while True:
         print("\n===== MENÚ SISTEMA AGENCIA =====")
         print("1. Registrar turista")
@@ -29,26 +35,21 @@ def menu():
             print("Turista registrado correctamente.")
 
         elif opcion == "2":
-            turistas = sistema._turistas.values()
-            for t in turistas:
+            for t in sistema.obtener_turistas():
                 print(t)
 
         elif opcion == "3":
-            # Datos básicos de ejemplo
             id_turista = input("ID del turista: ")
-            turista = sistema._turistas.get(id_turista)
+            turista = sistema.obtener_turista(id_turista)
 
             if not turista:
                 print("Turista no encontrado.")
                 continue
 
-            hotel = Hotel("H1", "Decameron", "Cartagena", 5, 10)
-            sucursal = Sucursal("S1", "Sucursal Centro", "Medellín", "Calle 10")
-
-            sistema.registrar_hotel(hotel)
+            id_reserva = input("ID de la reserva: ")
 
             sistema.crear_reserva_hotel(
-                "R1",
+                id_reserva,
                 turista,
                 sucursal,
                 "2026-02-20",

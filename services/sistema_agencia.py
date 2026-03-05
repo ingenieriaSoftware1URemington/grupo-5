@@ -1,30 +1,32 @@
-from services.sistema_agencia import SistemaAgencia
+# SOLO importa modelos si los necesitas
 from models.turista import Turista
 from models.hotel import Hotel
 from models.sucursal import Sucursal
 
-def main():
-    sistema = SistemaAgencia()
 
-    turista = Turista("T1", "Ana", "123", "ana@email.com", "300000")
-    hotel = Hotel("H1", "Decameron", "Cartagena", 5, 10)
-    sucursal = Sucursal("S1", "Sucursal Centro", "Medellín", "Calle 10")
+class SistemaAgencia:
 
-    sistema.registrar_turista(turista)
-    sistema.registrar_hotel(hotel)
-    sistema.registrar_sucursal(sucursal)  # 
+    def __init__(self):
+        self._turistas = {}
+        self._hoteles = {}
+        self._sucursales = {}
+        self._reservas = {}
 
-    sistema.crear_reserva_hotel(
-        "R1",
-        turista,
-        sucursal,
-        "2026-02-20",
-        hotel,
-        "2026-03-01",
-        "2026-03-05"
-    )
+    def registrar_turista(self, turista):
+        self._turistas[turista.id] = turista
 
-    print("Proyecto funcionando correctamente ")
+    def registrar_hotel(self, hotel):
+        self._hoteles[hotel.id] = hotel
 
-if __name__ == "__main__":
-    main()
+    def registrar_sucursal(self, sucursal):
+        self._sucursales[sucursal.id] = sucursal
+
+    def crear_reserva_hotel(self, id_reserva, turista, sucursal, fecha_reserva, hotel, fecha_entrada, fecha_salida):
+        self._reservas[id_reserva] = {
+            "turista": turista,
+            "sucursal": sucursal,
+            "hotel": hotel,
+            "fecha_reserva": fecha_reserva,
+            "fecha_entrada": fecha_entrada,
+            "fecha_salida": fecha_salida
+        }

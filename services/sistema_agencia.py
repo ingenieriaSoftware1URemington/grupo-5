@@ -12,6 +12,7 @@ def main():
 
     sistema.registrar_turista(turista)
     sistema.registrar_hotel(hotel)
+    sistema.registrar_sucursal(sucursal)  # 
 
     sistema.crear_reserva_hotel(
         "R1",
@@ -23,7 +24,7 @@ def main():
         "2026-03-05"
     )
 
-    print("Proyecto funcionando correctamente ✅")
+    print("Proyecto funcionando correctamente ")
 
 if __name__ == "__main__":
     main()

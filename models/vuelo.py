@@ -17,3 +17,29 @@ class Turista:
 
     def mostrar_info(self):
         return f"Turista: {self._nombre} - Email: {self._email}"
+        # =========================================
+# CLASE VUELO
+# Representa un vuelo disponible en el sistema
+# =========================================
+
+class Vuelo:
+
+    def __init__(self, id_vuelo, origen, destino, precio):
+
+        # Identificador del vuelo
+        self.id = id_vuelo
+
+        # Ciudad de salida
+        self.origen = origen
+
+        # Ciudad de destino
+        self.destino = destino
+
+        # Precio del vuelo
+        self.precio = precio
+
+
+    # Método para mostrar información del vuelo
+    def __str__(self):
+
+        return f"Vuelo {self.id} | {self.origen} -> {self.destino} | Precio: ${self.precio}"

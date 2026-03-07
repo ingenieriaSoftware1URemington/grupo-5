@@ -1,120 +1,127 @@
-# =========================================
-# IMPORTACIÓN DE CLASES
-# =========================================
-
 from services.sistema_agencia import SistemaAgencia
 from models.turista import Turista
 from models.hotel import Hotel
-from models.sucursal import Sucursal
+from models.vuelo import Vuelo
 
 
 def menu():
 
-    # Se crea el sistema principal de la agencia
     sistema = SistemaAgencia()
 
-    # =========================================
-    # CREACIÓN DE HOTEL Y SUCURSAL
-    # =========================================
 
-    # Creamos un hotel que estará disponible en el sistema
-    hotel = Hotel("H1", "Decameron", "Cartagena", 5, 10)
+    # =========================
+    # HOTELES
+    # =========================
 
-    # Creamos una sucursal de la agencia
-    sucursal = Sucursal("S1", "Sucursal Centro", "Medellín", "Calle 10")
+    hotel1 = Hotel("H1", "Decameron", "Cartagena", 5, 10)
+    hotel2 = Hotel("H2", "Hilton", "Bogotá", 5, 8)
+    hotel3 = Hotel("H3", "Dann Carlton", "Medellín", 4, 12)
 
-    # Registramos hotel y sucursal en el sistema
-    sistema.registrar_hotel(hotel)
-    sistema.registrar_sucursal(sucursal)
+    sistema.registrar_hotel(hotel1)
+    sistema.registrar_hotel(hotel2)
+    sistema.registrar_hotel(hotel3)
 
-    # =========================================
-    # MOSTRAR HOTEL AL INICIAR EL PROGRAMA
-    # =========================================
 
-    print("\n===== SISTEMA DE AGENCIA DE VIAJES =====")
-    print(f"Hotel disponible: {hotel.nombre}")
-    print(f"Ciudad: {hotel.ciudad}")
-    print("========================================")
+    # =========================
+    # VUELOS
+    # =========================
+
+    vuelo1 = Vuelo("V1", "Pereira", "Cartagena", 300000)
+    vuelo2 = Vuelo("V2", "Bogotá", "Medellín", 200000)
+
+    sistema.registrar_vuelo(vuelo1)
+    sistema.registrar_vuelo(vuelo2)
 
 
     while True:
 
-        print("\n===== MENÚ SISTEMA AGENCIA =====")
+        print("\n===== MENÚ AGENCIA =====")
         print("1. Registrar turista")
-        print("2. Listar turistas")
-        print("3. Crear reserva hotel")
-        print("4. Salir")
+        print("2. Ver turistas")
+        print("3. Ver hoteles")
+        print("4. Ver vuelos")
+        print("5. Reservar hotel")
+        print("6. Reservar vuelo")
+        print("7. Salir")
 
-        opcion = input("Seleccione una opción: ")
+        opcion = input("Seleccione: ")
 
 
-        # =========================
-        # REGISTRAR TURISTA
-        # =========================
         if opcion == "1":
 
-            id_turista = input("ID: ")
+            id = input("ID: ")
             nombre = input("Nombre: ")
             documento = input("Documento: ")
             email = input("Email: ")
             presupuesto = float(input("Presupuesto: "))
 
-            turista = Turista(id_turista, nombre, documento, email, presupuesto)
+            turista = Turista(id, nombre, documento, email, presupuesto)
 
             sistema.registrar_turista(turista)
 
-            print("Turista registrado correctamente.")
 
-
-        # =========================
-        # LISTAR TURISTAS
-        # =========================
         elif opcion == "2":
 
             for t in sistema.obtener_turistas():
                 print(t)
 
 
-        # =========================
-        # CREAR RESERVA
-        # =========================
         elif opcion == "3":
 
-            id_turista = input("ID del turista: ")
-            turista = sistema.obtener_turista(id_turista)
+            print("\nHoteles disponibles:")
 
-            if not turista:
-                print("Turista no encontrado.")
-                continue
-
-            id_reserva = input("ID de la reserva: ")
-
-            sistema.crear_reserva_hotel(
-                id_reserva,
-                turista,
-                sucursal,
-                "2026-02-20",
-                hotel,
-                "2026-03-01",
-                "2026-03-05"
-            )
-
-            print(f"Reserva creada en el hotel {hotel.nombre} correctamente.")
+            for h in sistema.obtener_hoteles():
+                print(h)
 
 
-        # =========================
-        # SALIR
-        # =========================
         elif opcion == "4":
 
-            print("Saliendo del sistema...")
+            print("\nVuelos disponibles:")
+
+            for v in sistema.obtener_vuelos():
+                print(v)
+
+
+        elif opcion == "5":
+
+            id_turista = input("ID turista: ")
+
+            turista = sistema.obtener_turista(id_turista)
+
+            for h in sistema.obtener_hoteles():
+                print(h)
+
+            id_hotel = input("Seleccione hotel: ")
+
+            hotel = sistema._hoteles.get(id_hotel)
+
+            sistema.crear_reserva_hotel("R1", turista, hotel)
+
+            print("Reserva de hotel creada.")
+
+
+        elif opcion == "6":
+
+            id_turista = input("ID turista: ")
+
+            turista = sistema.obtener_turista(id_turista)
+
+            for v in sistema.obtener_vuelos():
+                print(v)
+
+            id_vuelo = input("Seleccione vuelo: ")
+
+            vuelo = sistema._vuelos.get(id_vuelo)
+
+            sistema.crear_reserva_vuelo("R2", turista, vuelo)
+
+            print("Reserva de vuelo creada.")
+
+
+        elif opcion == "7":
+
             break
 
 
-        else:
-            print("Opción inválida.")
-
-
-# Punto de entrada del programa
 if __name__ == "__main__":
     menu()

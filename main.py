@@ -26,6 +26,7 @@ def menu():
     # VUELOS
     # =========================
 
+
     vuelo1 = Vuelo("V1", "Pereira", "Cartagena", 300000)
     vuelo2 = Vuelo("V2", "Bogotá", "Medellín", 200000)
 
